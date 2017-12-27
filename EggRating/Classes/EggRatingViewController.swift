@@ -56,6 +56,9 @@ class EggRatingViewController: UIViewController {
         laterButton.setTitle(EggRating.dismissButtonTitleText, for: .normal)
         laterButton.setTitleColor(defaultTintColor, for: .normal)
         
+        cancelButton.setTitle(EggRating.appStoreDismissButtonTitleText, for: .normal)
+        cancelButton.setTitleColor(defaultTintColor, for: .normal)
+        
         rateButton.setTitle(EggRating.rateButtonTitleText, for: .normal)
         rateButton.setTitleColor(defaultTintColor, for: .normal)
     }
