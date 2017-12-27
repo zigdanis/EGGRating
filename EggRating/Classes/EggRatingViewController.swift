@@ -35,8 +35,9 @@ class EggRatingViewController: UIViewController {
     @IBOutlet weak var starContainerView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var laterButton: UIButton!
     @IBOutlet weak var rateButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,8 +53,8 @@ class EggRatingViewController: UIViewController {
         titleLabel.text = EggRating.titleLabelText
         descriptionLabel.text = EggRating.descriptionLabelText
         
-        cancelButton.setTitle(EggRating.dismissButtonTitleText, for: .normal)
-        cancelButton.setTitleColor(defaultTintColor, for: .normal)
+        laterButton.setTitle(EggRating.dismissButtonTitleText, for: .normal)
+        laterButton.setTitleColor(defaultTintColor, for: .normal)
         
         rateButton.setTitle(EggRating.rateButtonTitleText, for: .normal)
         rateButton.setTitleColor(defaultTintColor, for: .normal)
@@ -100,11 +101,19 @@ class EggRatingViewController: UIViewController {
     
     // MARK: - Action
 
-    @IBAction func cancelButtonTouched(_ sender: UIButton) {
+    @IBAction func laterButtonTouched(_ sender: UIButton) {
         self.view.backgroundColor = UIColor.clear
         self.containerView.isHidden = true
         self.delegate?.didIgnoreToRate()
         self.dismiss(animated: false, completion: nil)
+    }
+    
+    @IBAction func cancelButtonTouched(_ sender: Any) {
+        self.view.backgroundColor = UIColor.clear
+        self.containerView.isHidden = true
+        self.delegate?.didIgnoreToRateOnAppStore()
+        EggRating.remindPeriod = Int.max
+        self.dismiss(animated: false)
     }
     
     @IBAction func rateButtonTouched(_ sender: UIButton) {
