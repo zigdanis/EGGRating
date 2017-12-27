@@ -114,7 +114,8 @@ class EggRatingViewController: UIViewController {
         let minRatingToAppStore = EggRating.minRatingToAppStore > 5 ? 5 : EggRating.minRatingToAppStore
         
         if rating >= minRatingToAppStore {
-            showRateInAppStoreAlertController()
+            sendUserToAppStore()
+            dismiss(animated: false, completion: nil)
             
             // only save last rated version if user rates more than mininum score
             UserDefaults.standard.set(EggRating.appVersion, forKey: EggRatingUserDefaultsKey.lastVersionRatedKey.rawValue)
@@ -140,24 +141,7 @@ class EggRatingViewController: UIViewController {
         
         self.present(disadvantageAlertController, animated: true, completion: nil)
     }
-    
-    func showRateInAppStoreAlertController() {
         
-        let rateInAppStoreAlertController = UIAlertController(title: EggRating.appStoreTitleLabelText, message: EggRating.appStoreDescriptionLabelText, preferredStyle: .alert)
-        
-        rateInAppStoreAlertController.addAction(UIAlertAction(title: EggRating.appStoreDismissButtonTitleText, style: .default, handler: { (_) in
-            self.dismiss(animated: false, completion: nil)
-            self.delegate?.didIgnoreToRateOnAppStore()
-        }))
-        
-        rateInAppStoreAlertController.addAction(UIAlertAction(title: EggRating.appStoreRateButtonTitleText, style: .default, handler: { (_) in
-            self.sendUserToAppStore()
-            self.dismiss(animated: false, completion: nil)
-        }))
-        
-        self.present(rateInAppStoreAlertController, animated: true, completion: nil)
-    }
-    
 }
 
 extension EggRatingViewController: RateViewDelegate {
